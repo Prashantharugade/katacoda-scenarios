@@ -1,2 +1,16 @@
 ---
+- name: Include Postgres Configmap
+  include_tasks: postgres-configmap.yaml
+- name: Include Postgres PVC
+  include_tasks: postgres-pvc.yaml
+- name: Include Postgres PV
+  include_tasks: postgres-pv.yaml
+- name: Include Postgres Service
+  include_tasks: postgres-service.yaml
+- name: Include Postgres Deployment
+  include_tasks: postgres-deployment.yaml
+- name: Include App Deployment
+  include_tasks: app-deployment.yaml
+- name: Include App Service
+  include_tasks: app-service.yaml
 # tasks file for App

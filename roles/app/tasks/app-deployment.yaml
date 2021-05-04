@@ -1,0 +1,37 @@
+- name: Create App Deployment
+  community.kubernetes.k8s:
+     definition:
+        kind: Deployment
+        apiVersion: v1
+        metadata:
+          name: '{{meta.name}}'
+          namespace: '{{meta.namespace}}'
+        spec:
+          selector:
+            matchLabels:
+              app: '{{meta.name}}'
+          replicas: 1
+          template:
+            metadata:
+              labels:
+                app: '{{meta.name}}'
+            spec:
+              containers:
+                - name: '{{meta.name}}'
+                  image: "thingsboard123/springbootdemo:0.0.1"
+                  imagePullPolicy: "Always"
+                  ports:
+                    - containerPort: 8080
+                  resources:
+                    requests:
+                      cpu: 100m
+                      memory: 300Mi
+                    limits:
+                      cpu: 1500m
+                      memory: 1024Mi
+                  livenessProbe:
+                    httpGet:
+                      path: /actuator/health
+                      port: 8080
+                    initialDelaySeconds: 180
+                    periodSeconds: 30
