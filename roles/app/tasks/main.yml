@@ -3,8 +3,6 @@
   include_tasks: postgres-configmap.yaml
 - name: Include Postgres PVC
   include_tasks: postgres-pvc.yaml
-- name: Include Postgres PV
-  include_tasks: postgres-pv.yaml
 - name: Include Postgres Service
   include_tasks: postgres-service.yaml
 - name: Include Postgres Deployment
