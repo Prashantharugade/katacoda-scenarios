@@ -2,22 +2,22 @@
   community.kubernetes.k8s:
      definition:
         kind: Deployment
-        apiVersion: v1
+        apiVersion: apps/v1
         metadata:
-          name: '{{ ansible_operator_meta.name }}'
+          name: '{{ ansible_operator_meta.name }}-spring'
           namespace: '{{ ansible_operator_meta.namespace }}'
         spec:
           selector:
             matchLabels:
-              app: '{{ ansible_operator_meta.name }}'
+              app: '{{ ansible_operator_meta.name }}-demo'
           replicas: 1
           template:
             metadata:
               labels:
-                app: '{{ ansible_operator_meta.name }}'
+                app: '{{ ansible_operator_meta.name }}-demo'
             spec:
               containers:
-                - name: '{{ ansible_operator_meta.name }}'
+                - name: '{{ ansible_operator_meta.name }}-demo'
                   image: "thingsboard123/springbootdemo:0.0.1"
                   imagePullPolicy: "Always"
                   ports:
