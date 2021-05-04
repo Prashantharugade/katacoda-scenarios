@@ -4,8 +4,7 @@
         kind: ConfigMap
         apiVersion: v1
         metadata:
-          name: '{{meta.name}}'
-          namespace: '{{meta.namespace}}'
+          name: postgres-config
           labels:
             app: postgres
         data:

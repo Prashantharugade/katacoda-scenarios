@@ -1,6 +1,4 @@
 ---
-- name: Include Postgres Configmap
-  include_tasks: postgres-configmap.yaml
 - name: Include Postgres PVC
   include_tasks: postgres-pvc.yaml
 - name: Include Postgres PV

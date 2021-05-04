@@ -7,19 +7,28 @@
           name: '{{meta.name}}'
           namespace: '{{meta.namespace}}'
         spec:
-        containers:
-          - name: '{{meta.name}}'
-            image: postgres:10.4
-            imagePullPolicy: "IfNotPresent"
-            ports:
-              - containerPort: 5432
-            envFrom:
-              - configMapRef:
-                  name: '{{meta.name}}'
-            volumeMounts:
+          replicas: 1
+          selector:
+            matchLabels:
+              app: postgres
+          template:
+            metadata:
+              labels:
+                app: postgres
+            spec:
+              containers:
+                - name: '{{meta.name}}'
+                  image: postgres:10.4
+                  imagePullPolicy: "IfNotPresent"
+                  ports:
+                    - containerPort: 5432
+                  envFrom:
+                    - configMapRef:
+                        name: postgres-config
+                  volumeMounts:
+                    - name: postgredb
+                      mountPath: /var/lib/postgresql/data
+              volumes:
                 - name: postgredb
-                  mountPath: /var/lib/postgresql/data
-        volumes:
-          - name: postgredb
-            persistentVolumeClaim:
-              claimName: postgres-pv-claim
+                  persistentVolumeClaim:
+                   claimName: postgres-pv-claim
