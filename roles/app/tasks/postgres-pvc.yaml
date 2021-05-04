@@ -9,7 +9,6 @@
           labels:
             app: postgres
         spec:
-          storageClassName: local
           accessModes:
             - ReadWriteMany
           resources:
