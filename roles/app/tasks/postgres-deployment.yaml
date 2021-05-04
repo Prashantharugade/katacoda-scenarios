@@ -31,4 +31,4 @@
               volumes:
                 - name: postgredb
                   persistentVolumeClaim:
-                   claimName: postgres-pv-claim
+                   claimName: '{{ ansible_operator_meta.name }}'
