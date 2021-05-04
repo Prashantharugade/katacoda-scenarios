@@ -4,10 +4,10 @@
         kind: Deployment
         apiVersion: v1
         metadata:
-          name: '{{meta.name}}'
-          namespace: '{{meta.namespace}}'
+          name: '{{ ansible_operator_meta.name }}'
+          namespace: '{{ ansible_operator_meta.namespace }}'
         spec:
-          replicas: 1
+          replicas: '{{size}}'
           selector:
             matchLabels:
               app: postgres
@@ -17,14 +17,14 @@
                 app: postgres
             spec:
               containers:
-                - name: '{{meta.name}}'
+                - name: '{{ ansible_operator_meta.name }}'
                   image: postgres:10.4
                   imagePullPolicy: "IfNotPresent"
                   ports:
                     - containerPort: 5432
                   envFrom:
                     - configMapRef:
-                        name: postgres-config
+                        name: '{{ ansible_operator_meta.name }}'
                   volumeMounts:
                     - name: postgredb
                       mountPath: /var/lib/postgresql/data
