@@ -4,10 +4,10 @@
         kind: Service
         apiVersion: v1
         metadata:
-          name: '{{ ansible_operator_meta.name }}-spring-service'
+          name: demo-service
           namespace: '{{ ansible_operator_meta.namespace }}'
           labels:
-            app: '{{ ansible_operator_meta.name }}-demo'
+            app: demo
         spec:
            type: NodePort
            ports:
@@ -17,4 +17,4 @@
                targetPort: 8080
                nodePort: 30200
         selector:
-           app: '{{ ansible_operator_meta.name }}'
+           app: demo
