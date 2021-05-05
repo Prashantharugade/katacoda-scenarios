@@ -4,7 +4,7 @@
         kind: PersistentVolumeClaim
         apiVersion: v1
         metadata:
-          name: '{{ ansible_operator_meta.name }}'
+          name: postgres-pv-claim
           namespace: '{{ ansible_operator_meta.namespace }}'
           labels:
             app: postgres
