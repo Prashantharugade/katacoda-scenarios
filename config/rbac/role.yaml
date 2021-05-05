@@ -14,7 +14,7 @@ rules:
       - roles
       - rolebindings
       - persistentvolumeclaims
-      - persistentVolumes
+      - persistentvolumes
       - serviceaccounts
       - secrets
       - configmaps
