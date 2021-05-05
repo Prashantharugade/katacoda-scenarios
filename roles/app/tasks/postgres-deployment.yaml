@@ -4,7 +4,7 @@
         kind: Deployment
         apiVersion: v1
         metadata:
-          name: '{{ ansible_operator_meta.name }}'
+          name: postgres
           namespace: '{{ ansible_operator_meta.namespace }}'
         spec:
           replicas: '{{size}}'
@@ -17,18 +17,18 @@
                 app: postgres
             spec:
               containers:
-                - name: '{{ ansible_operator_meta.name }}'
+                - name: postgres
                   image: postgres:10.4
                   imagePullPolicy: "IfNotPresent"
                   ports:
                     - containerPort: 5432
                   envFrom:
                     - configMapRef:
-                        name: '{{ ansible_operator_meta.name }}'
+                        name: postgres-config
                   volumeMounts:
                     - name: postgredb
                       mountPath: /var/lib/postgresql/data
               volumes:
                 - name: postgredb
                   persistentVolumeClaim:
-                   claimName: '{{ ansible_operator_meta.name }}'
+                   claimName: postgres-pv-claim
