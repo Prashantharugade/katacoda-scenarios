@@ -4,20 +4,20 @@
         kind: Deployment
         apiVersion: apps/v1
         metadata:
-          name: '{{ ansible_operator_meta.name }}-spring'
+          name: demo
           namespace: '{{ ansible_operator_meta.namespace }}'
         spec:
           selector:
             matchLabels:
-              app: '{{ ansible_operator_meta.name }}-demo'
+              app: demo
           replicas: 1
           template:
             metadata:
               labels:
-                app: '{{ ansible_operator_meta.name }}-demo'
+                app: demo
             spec:
               containers:
-                - name: '{{ ansible_operator_meta.name }}-demo'
+                - name: demo
                   image: "thingsboard123/springbootdemo:0.0.1"
                   imagePullPolicy: "Always"
                   ports:
