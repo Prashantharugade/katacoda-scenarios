@@ -26,11 +26,9 @@
                 - image: mysql:5.7                  # The container image
                   name: mysql
                   imagePullPolicy: "IfNotPresent"   # Get it from dockerhub if it is not present in our machine
-
                   envFrom:                                # Environment variables passed to the container 
                     - secretRef:                            # Read environment variables from kubernetes secrets
                         name: mysql-secret
-
                   ports:
                     - containerPort: 3306             # The port that the container exposes 
                       name: mysql
