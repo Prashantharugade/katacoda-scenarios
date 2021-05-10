@@ -1,14 +1,14 @@
 ---
-- name: Include Postgres ConfigMap
-  include_tasks: postgres-configmap.yaml
-- name: Include Postgres PVC
-  include_tasks: postgres-pvc.yaml
-- name: Include Postgres Service
-  include_tasks: postgres-service.yaml
-- name: Include Postgres Deployment
-  include_tasks: postgres-deployment.yaml
+- name: Include MySQL Secrete
+  include_tasks: mysql-secret.yaml
+- name: Include MySQL PVC
+  include_tasks: mysql-db-pvc.yaml
+- name: Include MySQL Deployment
+  include_tasks: mysql-db-deployment.yaml
+- name: Include MySQL Service
+  include_tasks: mysql-db-service.yaml
 - name: Include App Deployment
-  include_tasks: app-deployment.yaml
+  include_tasks: app-mysql-deployment.yaml
 - name: Include App Service
-  include_tasks: app-service.yaml
+  include_tasks: app-mysql-service.yaml
 # tasks file for App
