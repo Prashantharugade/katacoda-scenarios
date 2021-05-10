@@ -1,4 +1,4 @@
-- name: Create Postgres Deployment
+- name: Create Mysql Deployment
   community.kubernetes.k8s:
      definition:
         kind: Deployment
@@ -15,7 +15,7 @@
               tier: mysql
             strategy:
               type: Recreate 
-            replicas: 1
+            replicas: '{{size}}'
           template:                                 # Template for the pods in this deployment
             metadata: 
               labels:                               # labels to be applied to the pods in this deployment 
