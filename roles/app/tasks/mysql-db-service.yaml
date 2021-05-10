@@ -2,7 +2,7 @@
   community.kubernetes.k8s:
      definition:
         kind: Service
-        apiVersion: apps/v1
+        apiVersion: v1
         metadata:
           name: fullstack-mysql
           namespace: '{{ ansible_operator_meta.namespace }}'
