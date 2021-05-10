@@ -1,4 +1,4 @@
-- name: Create Postgres Service
+- name: Create Mysql Service
   community.kubernetes.k8s:
      definition:
         kind: Service
