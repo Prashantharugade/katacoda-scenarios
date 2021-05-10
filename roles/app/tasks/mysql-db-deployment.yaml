@@ -1,41 +1,40 @@
-- name: Create Mysql Deployment
+- name: Create MySQL Deployment
   community.kubernetes.k8s:
      definition:
-        kind: Deployment
-        apiVersion: apps/v1
-        metadata:
-          name: fullstack-mysql
-          namespace: '{{ ansible_operator_meta.namespace }}'
-          labels:                                   # Labels applied to this deployment
+       apiVersion: apps/v1
+       kind: Deployment
+       metadata:
+         name: fullstack-mysql
+         namespace: '{{ ansible_operator_meta.namespace }}'
+         labels:
+           app: fullstack-mysql
+           tier: mysql
+       spec:
+        selector: 
+         matchLabels:
+           app: fullstack-mysql
+           tier: mysql
+        strategy:
+          type: Recreate
+        template:
+         metadata:
+          labels: 
             app: fullstack-mysql
-        spec:
-          selector:
-            matchLabels:                            # This deployment applies to the Pods matching the specified labels
-              app: fullstack-mysql
-              tier: mysql
-            strategy:
-              type: Recreate 
-            replicas: '{{size}}'
-          template:                                 # Template for the pods in this deployment
-            metadata: 
-              labels:                               # labels to be applied to the pods in this deployment 
-                app: fullstack-mysql
-                tier: mysql
-            spec:                                   # The spec for the containers that will be run inside the Pods in this deployment
-              containers:
-                - image: mysql:5.7                  # The container image
-                  name: mysql
-                  imagePullPolicy: "IfNotPresent"   # Get it from dockerhub if it is not present in our machine
-                  envFrom:                                # Environment variables passed to the container 
-                    - secretRef:                            # Read environment variables from kubernetes secrets
-                        name: mysql-secret
-                  ports:
-                    - containerPort: 3306             # The port that the container exposes 
-                      name: mysql
-                  volumeMounts:
-                    - name: mysql-persistent-storage
-                      mountPath: /var/lib/mysql # This name should match the name specified in `volumes.name`
-            volumes:                        # A PersistentVolume is mounted as a volume to the Pod  
-              - name: mysql-persistent-storage 
-                persistentVolumeClaim:
-                  claimName: mysql-pv-claim
+            tier: mysql
+         spec:
+           containers:
+           - image: mysql:5.7
+             name: mysql
+             envFrom:                                # Environment variables passed to the container 
+                 - secretRef:                            # Read environment variables from kubernetes secrets
+                    name: mysql-secret
+             ports:
+              - containerPort: 3306
+                name: mysql
+             volumeMounts:        
+              - name: mysql-persistent-storage
+                mountPath: /var/lib/mysql 
+           volumes:
+             - name: mysql-persistent-storage 
+               persistentVolumeClaim:
+                claimName: mysql-pv-claim
