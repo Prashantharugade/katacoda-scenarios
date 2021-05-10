@@ -8,8 +8,7 @@
           namespace: '{{ ansible_operator_meta.namespace }}'
           labels:
             app: fullstack-mysql
-        spec:                                   # Access mode and resource limits
-          storageClassName: manual              # Request a certain storage class
+        spec:                                   # Access mode and resource limit         # Request a certain storage class
           accessModes:
             - ReadWriteMany                     # ReadWriteMany means the volume can be mounted as read-write by many Nodes
           resources:
