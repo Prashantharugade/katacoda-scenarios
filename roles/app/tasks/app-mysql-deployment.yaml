@@ -9,7 +9,7 @@
           labels:
             app: fullstack-app-mysql
         spec:
-          replicas: 1                                                 # Number of pods to run at any given time
+          replicas: '{{size}}'                                                 # Number of pods to run at any given time
           selector:
             matchLabels: 
               app: fullstack-app-mysql                                # This deployment applies to any Pods matching the specified label
