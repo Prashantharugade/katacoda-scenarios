@@ -35,8 +35,8 @@
                     - containerPort: 3306             # The port that the container exposes 
                       name: mysql
                   volumeMounts:
-                    - mountPath: /var/lib/mysql
-                      name: mysql-persistent-storage # This name should match the name specified in `volumes.name`
+                    - name: mysql-persistent-storage
+                      mountPath: /var/lib/mysql # This name should match the name specified in `volumes.name`
             volumes:                        # A PersistentVolume is mounted as a volume to the Pod  
               - name: mysql-persistent-storage 
                 persistentVolumeClaim:
